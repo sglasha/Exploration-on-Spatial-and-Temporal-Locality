@@ -4,8 +4,8 @@ import sys
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Set Recursion limit to 20000
-sys.setrecursionlimit(20000)
+# Set Recursion limit to 100000
+sys.setrecursionlimit(100000)
 
 # Functions
 def stop_program():
@@ -138,7 +138,7 @@ if choice == 2:
     matrix_data = {}
     test_matrix = []
     starting_size = 5
-    num_graph_sizes = 10
+    num_graph_sizes = 12
 
     # Generate sample lists for 2^0 - 2^num_graph_sizes
     array = generate_array(10000)
