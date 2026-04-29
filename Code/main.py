@@ -154,6 +154,30 @@ if choice == 2:
         arrays.append(array_data)
         array_data = {}
 
+    # Generate sample graphs for sizes 2^starting_size - 2^starting_size + num_graph_sizes for visual representation through pyplot
+    for power in range(num_graph_sizes):
+        sized = pow(2, starting_size + power)
+        test_matrix = generate_graph(sized)
+        matrix_data["Matrix Size"] = sized
+        matrix_data["Row Wise Time"] = get_average(row_wise_iteration, test_matrix)
+        matrix_data["Col Wise Time"] = get_average(col_wise_iteration, test_matrix)
+        matrices.append(matrix_data)
+        matrix_data = {} # clear matrix data to prevent bad data
+
+    # Generate Sample Graphs for sizes 2^(starting_size + num_graph_sizes) to 2^(starting_size + 2 * num_graph_sizes)
+    for power in range(num_graph_sizes):
+        sized = pow(2, starting_size + power)
+        test_array = [0]
+        array_data["Accesses"] = sized
+        array_data["Iterative"] = get_recursive_average(itterative_locality, test_array, sized)
+        array_data["Recursive"] = get_recursive_average(recursive_locality, test_array, sized)
+        accesses.append(array_data)
+        array_data = {} # clear matrix data to prevent bad data
+
+    # Generate Each Pyplot with the data here to reduce wait time because all the data is finished generating
+
+    # Generate Figure 1
+
     strides = []
     times = []
 
@@ -171,15 +195,7 @@ if choice == 2:
     plt.grid(True)
     plt.show()
 
-    # Generate sample graphs for sizes 2^starting_size - 2^starting_size + num_graph_sizes for visual representation through pyplot
-    for power in range(num_graph_sizes):
-        sized = pow(2, starting_size + power)
-        test_matrix = generate_graph(sized)
-        matrix_data["Matrix Size"] = sized
-        matrix_data["Row Wise Time"] = get_average(row_wise_iteration, test_matrix)
-        matrix_data["Col Wise Time"] = get_average(col_wise_iteration, test_matrix)
-        matrices.append(matrix_data)
-        matrix_data = {} # clear matrix data to prevent bad data
+    # Generate Figure 2
 
     sizes = []
     row_times = []
@@ -201,15 +217,7 @@ if choice == 2:
     plt.grid(True)
     plt.show()
 
-    # Generate Sample Graphs for sizes 2^(starting_size + num_graph_sizes) to 2^(starting_size + 2 * num_graph_sizes)
-    for power in range(num_graph_sizes):
-        sized = pow(2, starting_size + power)
-        test_array = [0]
-        array_data["Accesses"] = sized
-        array_data["Iterative"] = get_recursive_average(itterative_locality, test_array, sized)
-        array_data["Recursive"] = get_recursive_average(recursive_locality, test_array, sized)
-        accesses.append(array_data)
-        array_data = {} # clear matrix data to prevent bad data
+    # Generate Figure 3
 
     sizes = []
     iterative_results = []
